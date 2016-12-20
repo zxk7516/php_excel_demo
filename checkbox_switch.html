@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .checkboxSwitch input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkboxSwitch {
+            width: 120px;
+            height: 40px;
+            background: #333;
+            margin: 20px 60px;
+            border-radius: 50px;
+            position: relative;
+        }
+
+        .checkboxSwitch:before {
+            content: '正常';
+            position: absolute;
+            top: 12px;
+            left: 13px;
+            height: 2px;
+            color: #26ca28;
+            font-size: 12px;
+        }
+
+        .checkboxSwitch:after {
+            content: '禁用';
+            position: absolute;
+            top: 12px;
+            left: 84px;
+            height: 2px;
+            color: #ddd;
+            font-size: 12px;
+        }
+
+        .checkboxSwitch label {
+            display: block;
+            width: 52px;
+            height: 22px;
+            border-radius: 50px;
+            transition: all .5s ease;
+            cursor: pointer;
+            position: absolute;
+            top: 9px;
+            z-index: 1;
+            left: 12px;
+            background: #ddd;
+        }
+
+        .checkboxSwitch input[type=checkbox]:checked + label {
+            left: 60px;
+            background: #26ca28;
+        }
+
+        .checkboxSwitch2 input[type="checkbox"] {
+
+        }
+        .checkboxSwitch2 {}
+
+
+    </style>
+</head>
+<body>
+<section>
+    <!-- Checbox Three -->
+    <div class="checkboxSwitch2">
+        <input type="checkbox" value="1" id="checkboxThreeInput" name=""/>
+        <label for="checkboxThreeInput">禁用 正常</label>
+    </div>
+</section>
+
+</body>
+</html>
