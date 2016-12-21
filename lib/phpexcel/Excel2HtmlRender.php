@@ -50,13 +50,14 @@ class Excel2HtmlRender{
 			$tmpRow .= '<tr>'.PHP_EOL;
 			$cellIterator = $row->getCellIterator();
 			try {
-				$cellIterator->setIterateOnlyExistingCells(true);
+				$cellIterator->setIterateOnlyExistingCells(false);
 					// This loops through all cells,
 					//    even if a cell value is not set.
 					// By default, only cells that have a value
 					//    set will be iterated.
 			} catch (\PHPExcel_Exception $e) {
 			}
+
 			foreach ($cellIterator as $colIdxName=>$cell) {
 				$colIdx = \PHPExcel_Cell::columnIndexFromString( $colIdxName );
 				// var_dump($colIdx);
@@ -64,6 +65,7 @@ class Excel2HtmlRender{
 				$colspan = 1;
 
 				if( @$skipCell[$colIdxName.$rowIdx] ){
+				    echo $colIdxName.$rowIdx;
 					continue;
 				}
 				foreach($mergedCells as $mergedCell){
@@ -89,7 +91,7 @@ class Excel2HtmlRender{
 				if( $rowIdx <= $options['header_row'] || $colIdx <= $options['header_col'] ){
 					$cellTagName = 'th';
 				}
-				$cellValue = $cell->getFormattedValue();
+				$cellValue = $cell->getFormatedValue();
 				switch( $options['cell_renderer'] ){
 					case 'text':
 						$cellValue = htmlspecialchars($cellValue);
@@ -97,9 +99,9 @@ class Excel2HtmlRender{
 						break;
 					case 'html':
 						break;
-					case 'markdown':
-						$cellValue = \Michelf\MarkdownExtra::defaultTransform($cellValue);
-						break;
+//					case 'markdown':
+//						$cellValue = \Michelf\MarkdownExtra::defaultTransform($cellValue);
+//						break;
 				}
 				// var_dump( $cell->getNumberFormat() );
 
@@ -178,25 +180,19 @@ class Excel2HtmlRender{
 	} // render()
 
     public function render($options){
-        $skipCell = array();
         $objWorksheets = $this->objPHPExcel->getAllSheets();
         ob_start();
         $objWorksheetNames =  $this->objPHPExcel->getSheetNames() ;
         foreach ($objWorksheets as $k => $objWorksheet){
+            $skipCell = array();
             echo '<h2>'.$objWorksheetNames[$k].'</h2>';
             $mergedCells = $objWorksheet->getMergeCells();
-            $column_number = $objWorksheet->getHighestColumn(); //多少列
-            $row_number = $objWorksheet->getHighestRow();
 
             $col_widths = array();
             foreach ($objWorksheet->getRowIterator() as $rowIdx=>$row) {
                 $cellIterator = $row->getCellIterator();
                 try {
                     $cellIterator->setIterateOnlyExistingCells(false);
-                    // This loops through all cells,
-                    //    even if a cell value is not set.
-                    // By default, only cells that have a value
-                    //    set will be iterated.
                 } catch (\PHPExcel_Exception $e) {
                     var_dump($e);
                 }
@@ -214,7 +210,7 @@ class Excel2HtmlRender{
                 $tmpRow .= '<tr>'.PHP_EOL;
                 $cellIterator = $row->getCellIterator();
                 try {
-                    $cellIterator->setIterateOnlyExistingCells(true);
+                    $cellIterator->setIterateOnlyExistingCells(false);
                     // This loops through all cells,
                     //    even if a cell value is not set.
                     // By default, only cells that have a value

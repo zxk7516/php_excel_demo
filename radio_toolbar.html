@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .radio-toolbar input[type="radio"] {
+            display:none;
+        }
+
+        .radio-toolbar>label {
+            display:inline-block;
+            background-color:#ddd;
+            padding:4px ;
+            font-family:Arial;
+            font-size:16px;
+        }
+        .radio-toolbar label:first-of-type{
+            border-radius: 12px 0 0 12px;
+        }
+        .radio-toolbar label:last-of-type{
+            border-radius: 0 12px 12px  0;
+        }
+
+        .radio-toolbar input[type="radio"]:checked + label {
+            background-color:#bbb;
+        }
+    </style>
+</head>
+<body>
+<div class="radio-toolbar">
+    <input type="radio" id="radio1" name="radios" value="all" checked>
+    <label for="radio1">从不</label>
+
+    <input type="radio" id="radio2" name="radios"value="false">
+    <label for="radio2">有时</label>
+
+    <input type="radio" id="radio3" name="radios" value="true">
+    <label for="radio3">经常</label>
+</div>
+
+
+</body>
+</html>

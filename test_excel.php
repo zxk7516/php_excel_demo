@@ -15,7 +15,7 @@
 <?php
 require_once './lib/phpexcel/Excel2HtmlRender.php';
 //$render = new Excel2HtmlRender('./Engineer.xls');
-$render = new Excel2HtmlRender('./test.xlsx');
+$render = new Excel2HtmlRender('./test2.xlsx');
 print $render->render(Excel2HtmlRender::optimize_options(array(
     'renderer'=>'simple',//只能用simple
 )));
